@@ -1,0 +1,16 @@
+1. SELECT Em.* FROM emp Em INNER JOIN emp M ON Em.mgr = M.empno WHERE Em.hiredate < M.hiredate;
+2. SELECT Em.* FROM emp Em INNER JOIN dept D1 ON Em.deptno = D1.deptno INNER JOIN dept D2 ON D1.dname = D2.dname WHERE D1.deptno = 20 AND D2.deptno = 10;
+3. SELECT * FROM emp WHERE sal IN (SELECT sal FROM emp WHERE ename = 'FORD' OR ename = 'SMITH') ORDER BY sal DESC;
+4. SELECT * FROM emp WHERE job = 'MILLER' OR sal > (SELECT sal FROM emp WHERE ename = 'ALLEN');
+5. SELECT * FROM emp WHERE sal > (SELECT SUM(sal + IFNULL(comm, 0)) FROM emp WHERE job = 'SALESMAN');
+6. SELECT Em.* FROM emp Em INNER JOIN emp M ON Em.mgr = M.empno INNER JOIN dept D ON Em.deptno = D.deptno WHERE M.ename = 'BLAKE' AND (D.loc = 'CHICAGO' OR D.loc = 'BOSTON') AND Em.hiredate < M.hiredate;
+7. SELECT * FROM emp WHERE job = (SELECT job FROM emp WHERE ename = 'ALLEN') OR job = (SELECT job FROM emp WHERE ename = 'SMITH');
+8. SELECT DISTINCT job FROM emp WHERE deptno = 10 AND job NOT IN (SELECT DISTINCT job FROM emp WHERE deptno = 20);
+9. SELECT SUM(sal) AS T_Salary FROM emp WHERE job = 'MANAGER';
+10. SELECT job, SUM(sal) AS T_Annual_Salary FROM emp GROUP BY job;
+11. SELECT * FROM emp WHERE deptno <> ( SELECT deptno FROM dept WHERE dname = 'SALES');
+12. SELECT Em.* FROM emp Em INNER JOIN (SELECT AVG(sal) AS Av_Sal FROM emp WHERE deptno = 10) D ON Em.deptno = 20 AND Em.sal > D.Av_Sal;
+13. SELECT Em1.* FROM emp Em1 JOIN emp Em2 ON Em1.empno <> Em2.empno AND Em1.hiredate < Em2.hiredate WHERE Em2.mgr = (SELECT empno FROM emp WHERE ename = 'KING');
+14. SELECT * FROM emp WHERE hiredate = (SELECT MIN(hiredate) FROM emp WHERE hiredate LIKE '1981%');
+15. SELECT Em.deptno, Em.job, COUNT(*) AS Em_count FROM emp Em GROUP BY Em.deptno, Em.job;
+
